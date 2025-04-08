@@ -39,7 +39,7 @@ async def on_ready():
 async def scrape(ctx=None):
     print("Scraping...")
     try:
-        channel = bot.get_channel(1006323059231313973)
+        channel = bot.get_channel(ENTER_CHANNEL_ID_HERE)
 
         res = requests.get("https://www.warhammer-community.com/en-gb/")
         res.raise_for_status()
@@ -66,7 +66,7 @@ async def scrape(ctx=None):
 @tasks.loop(minutes=1)
 async def scheduled_scraping():
     now = datetime.datetime.now()
-    if now.minute == 0 and now.hour in [7, 12, 19, 22, 23]:
+    if now.minute == 0 and now.hour in [7, 12, 19, 22]:
         await scrape(None)
 
 bot.run('TOKEN')
